@@ -6,11 +6,11 @@ const hideAlert = () => {
   if (el) el.parentElement.removeChild(el);
 };
 
-const showAlert = (type, msg) => {
+const showAlert = (type, msg, time = 7) => {
   hideAlert();
   const markup = `<div class="alert alert--${type}">${msg}</div>`;
   document.querySelector('body').insertAdjacentHTML('afterbegin', markup);
-  window.setTimeout(hideAlert, 5000);
+  window.setTimeout(hideAlert, time * 1000);
 };
 
 const login = async (email, password) => {
@@ -57,3 +57,6 @@ const logout = async () => {
 };
 
 if (logOutBtn) logOutBtn.addEventListener('click', logout);
+
+const alertMessage = document.querySelector('body').dataset.alert;
+if (alert) showAlert('success', alertMessage, 20);
